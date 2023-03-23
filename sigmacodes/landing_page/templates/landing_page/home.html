@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title%}
+Home Page
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+</div>
+<div class="d-flex align-items-center flex-column bd-highlight mb-3">
+  <div class="p-2 bd-highlight">
+    <h1 style="text-align: center; margin-top: 100px; font-size: 70px; color: #182638;">
+      Welcome to <span style="font-style: italic; color: chocolate;">SigmaCodes</span>
+    </h1>
+  </div>
+  <div class="p-2 bd-highlight">
+    <h2 style="text-align: center; margin: 50px;">
+      For data visualization options, kindly go to the dashborad
+    </h2>
+  </div>
+  <div class="p-2 bd-highlight">
+    <h1 style="text-align: center; color: chocolate; font-size: 40px; font-style: italic;">
+      We tell stories behind data
+    </h1>
+  </div>
+  <footer class="py-3 my-0">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="{% url 'landing-home' %}" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="{% url 'landing-about' %}" class="nav-link px-2 text-muted">About</a></li>
+      <li class="nav-item"><a href="{% url 'dashboard-data' %}" class="nav-link px-2 text-muted">Dashboard</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Services</a></li>
+      <li class="nav-item"><a href="{% url 'landing-home' %}" class="nav-link px-2 text-muted">Register</a></li>
+    </ul>
+    <p class="text-center text-muted">&copy; 2023 Dr-Plain ALX</p>
+  </footer>
+  {% endblock %}
