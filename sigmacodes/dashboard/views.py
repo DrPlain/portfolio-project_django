@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import plotly.express as px
 import pandas as pd
-from .forms import DataSource, SelectChart, UploadData, df, NominalNumerical, NominalForm, NumericalForm
+from .forms import DataSource, SelectChart, UploadData, df, NominalNumerical, NominalForm, ScatterForm
 from .utility import get_variables_names, get_chart
 
 def data(request):
@@ -89,3 +89,19 @@ def bar_chart(request):
             return render(request, 'dashboard/barchart.html', context)
     else:
         return render(request, 'dashboard/barchart.html', {'form': NominalNumerical()})
+
+def scatter_plot(request):
+    if request.method == 'POST':
+        form = ScatterForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data.get('x_axis')
+            y_axis = form.cleaned_data.get('y_axis')
+            color_by = form.cleaned_data.get('color_by')
+            chart = get_chart('Scatter plot', df, x_axis, y_axis, color_by)                   
+            context = {
+                'chart': chart,
+                'form': form
+            }
+            return render(request, 'dashboard/scatter_plot.html', context)
+    else:
+        return render(request, 'dashboard/scatter_plot.html', {'form': ScatterForm()})

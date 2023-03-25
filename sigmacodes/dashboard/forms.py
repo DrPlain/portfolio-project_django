@@ -40,3 +40,13 @@ class NominalForm(forms.Form):
 class NumericalForm(forms.Form):
     y_axis = forms.CharField(label="Select Y axis value",
                                   widget = forms.Select(choices=numerical_variables))
+    
+class ScatterForm(forms.Form):
+    new_numerical = list(numerical_variables)
+    new_numerical.insert(0, ('None', 'None'))
+    x_axis = forms.CharField(label="Select X axis value",
+                                  widget = forms.Select(choices=numerical_variables))
+    y_axis = forms.CharField(label="Select Y axis value",
+                                  widget = forms.Select(choices=numerical_variables))
+    color_by = forms.CharField(label="Color by",
+                                  widget = forms.Select(choices=new_numerical))

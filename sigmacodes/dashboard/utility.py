@@ -5,20 +5,40 @@ from matplotlib import pyplot
 from io import BytesIO, StringIO
 import base64
 
-def get_chart(selected_chart, df, x_axis, y_axis=None):
+def get_chart(selected_chart, df, x_axis, y_axis=None, color=None):
     pyplot.switch_backend('AGG')
+    pyplot.style.use('seaborn')
     fig = pyplot.figure(figsize=(10, 4))
     if selected_chart == 'Bar chart':
         if y_axis:
             pyplot.bar(df[x_axis], df[y_axis])
+            pyplot.xlabel(f'{x_axis}'.capitalize())
+            pyplot.ylabel(f'{y_axis}'.capitalize())
+            pyplot.title(f'A simple bar chart comparing {x_axis} with {y_axis} ')
+            pyplot.tight_layout()        
     elif selected_chart == 'Pie chart':
-        if y_axis == 'None':
-            pyplot.pie(df[x_axis])
-    # elif selected_chart == 'Scatter plot':
-    #     print("Line graph")
-    #     pyplot.plot(d[key], d['total_price'], color='gray', marker='o', linestyle='dashed')
-    # else:
-    #     print("Apparently...selected_chart not identified")
+        pyplot.pie(df[x_axis].groupby(x_axis))
+    elif selected_chart == 'Scatter plot':
+        if color != 'None':
+            pyplot.scatter(df[x_axis],
+                        df[y_axis], 
+                        c=df[color],
+                        edgecolors='black', 
+                        linewidths=1,
+                        cmap='Blues',
+                        alpha=0.75)
+            cbar = pyplot.colorbar()
+            cbar.set_label(f'{color}')
+        else:
+            pyplot.scatter(df[x_axis],
+                        df[y_axis],
+                        edgecolors='black', 
+                        linewidths=1,
+                        alpha=0.75)
+        pyplot.xlabel(f'{x_axis}'.capitalize())
+        pyplot.ylabel(f'{y_axis}'.capitalize())
+        pyplot.title(f'A scatter plot comparing {x_axis} with {y_axis} ')
+        pyplot.tight_layout()        
 
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
@@ -37,40 +57,3 @@ def get_variables_names(df):
             numerical_variables.append(tuple([key, key]))
         
     return tuple(nominal_variables), tuple(numerical_variables)
-
-def barchart(df, x_axis, y_axis):
-    if y_axis == 'None':
-        if x_axis != 'None':
-            fig = px.bar(df,
-                        x=x_axis,
-                        color_discrete_sequence=['blue'],
-                        title='A simple bar chart',
-                        width=1000,
-                        height=600,
-                        )
-        else:
-            return None
-    else:
-        if x_axis != 'None':
-            fig = px.bar(df,
-                        x=x_axis,
-                        y=y_axis,
-                        color = np.random.randn(111438),
-                        title='A simple bar chart',
-                        width=1000,
-                        height=600,
-                        )
-        else:
-            return None
-    # fig.update_traces(marker_color='green',
-    #                 textposition='outside')
-    fig.update_layout(title_x=0.5, # center title
-                    bargap=0.05, # space bars
-                    xaxis_titlefont_size=16,
-                    yaxis=dict(titlefont_size=16,
-                                tickfont_size=14)
-                    )
-    figure = plot(fig, output_type='div', include_plotlyjs=False)
-    return figure
-
-        

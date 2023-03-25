@@ -5,8 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.data, name='dashboard-data'),
-    path('BarChart', views.bar_chart, name='dashboard-barchart'),
-    path('PieChart', views.pie_chart, name='dashboard-piechart'),
+    path('Bar-Chart', views.bar_chart, name='dashboard-barchart'),
+    path('Pie-Chart', views.pie_chart, name='dashboard-piechart'),
+    path('Scatter-Plot', views.scatter_plot, name='dashboard-scatter'),
     path('chart', views.select_chart, name='dashboard-select_chart'),
     path('upload', views.upload_file, name='dashboard-upload_file')
 ] + static(settings.STATIC_URL, 
