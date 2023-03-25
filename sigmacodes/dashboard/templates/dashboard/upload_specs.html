@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Visualization dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <form class="form-input" action="{% url 'dashboard-upload_file' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input class="btn btn-success" type="submit">
+    </form>
+    <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+        {% load static %}
+        <div class="p-2 bd-highlight">
+            <img src="{% static 'dashboard/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                style="width: 100%;">
+        </div>
+        <div class="p-2 bd-highlight">
+            {% autoescape off %}
+            {% if plot_div %}
+            {{ plot_div }}
+            {% else %}
+            <h1 style="color: #182638; font-size: 50px; text-align: center;">
+                Please select visualization settings
+            </h1>
+            {% endif %}
+            {% endautoescape %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

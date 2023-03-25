@@ -89,6 +89,7 @@ footer {
 .change:hover {
     color: #182638;
 }
-rect.nsewdrag .drag {
-    fill: white;
+.plot-container.plotly {
+    fill: red;
+    background-color: red;
 }
