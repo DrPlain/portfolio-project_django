@@ -28,10 +28,12 @@ class SelectChart(forms.Form):
                                   widget = forms.Select(choices=CHART_CHOICES))
     
 class NominalNumerical(forms.Form):
+    new_numerical = list(numerical_variables)
+    new_numerical.insert(0, ('None', 'None'))
     x_axis = forms.CharField(label="Select X axis value",
                                   widget = forms.Select(choices=nominal_variables))
     y_axis = forms.CharField(label="Select Y axis value",
-                                  widget = forms.Select(choices=numerical_variables))
+                                  widget = forms.Select(choices=new_numerical))
     
 class NominalForm(forms.Form):
     x_axis = forms.CharField(label="Select X axis value",
