@@ -52,3 +52,9 @@ class ScatterForm(forms.Form):
                                   widget = forms.Select(choices=numerical_variables))
     color_by = forms.CharField(label="Color by",
                                   widget = forms.Select(choices=new_numerical))
+    
+class HistogramForm(forms.Form):
+    x_axis = forms.CharField(label="Select X axis value",
+                                  widget = forms.Select(choices=numerical_variables))
+    bins = forms.ChoiceField(choices=[(x, x) for x in range(1, 21)],
+                             label='Number of bins')

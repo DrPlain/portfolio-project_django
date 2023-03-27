@@ -6,7 +6,7 @@ from io import BytesIO, StringIO
 import base64
 import seaborn as sns
 
-def get_chart(selected_chart, df, x_axis, y_axis, color=None):
+def get_chart(selected_chart, df, x_axis, y_axis=None, color=None, bin=None):
     pyplot.switch_backend('AGG')
     pyplot.style.use('seaborn')
     fig = pyplot.figure(figsize=(10, 4))
@@ -25,7 +25,9 @@ def get_chart(selected_chart, df, x_axis, y_axis, color=None):
             pyplot.bar(x, y)
             pyplot.xlabel(f'{x_axis}'.capitalize())
             pyplot.ylabel('Count')
-            pyplot.title(f'A simple bar chart showing the distribution of {x_axis}')
+            pyplot.title(f'A simple bar chart showing the distribution of {x_axis}',
+                         fontdict={'fontsize':16},
+                         pad=20)
         pyplot.tight_layout()
 
     elif selected_chart == 'Pie chart':
@@ -77,9 +79,19 @@ def get_chart(selected_chart, df, x_axis, y_axis, color=None):
                         alpha=0.75)
         pyplot.xlabel(f'{x_axis}'.capitalize())
         pyplot.ylabel(f'{y_axis}'.capitalize())
-        pyplot.title(f'A scatter plot comparing {x_axis} with {y_axis} ')
-        pyplot.tight_layout()        
+        pyplot.title(f'A scatter plot comparing {x_axis} with {y_axis}',
+                     fontdict={'fontsize': 16},
+                     pad=20)
+        pyplot.tight_layout()
 
+    elif selected_chart == 'Histogram':
+        pyplot.hist(df[x_axis],
+                    bins=bin,
+                    edgecolor='black')        
+        pyplot.title(f'A histogram showing the distribution of {x_axis}',
+                     fontdict={'fontsize': 16},
+                     pad=20)
+        pyplot.tight_layout()
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)

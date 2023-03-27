@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 import plotly.express as px
 import pandas as pd
-from .forms import DataSource, SelectChart, UploadData, df, NominalNumerical, NominalForm, ScatterForm
+from .forms import (DataSource,
+                    SelectChart,
+                    UploadData, df,
+                    NominalNumerical,
+                    NominalForm,
+                    ScatterForm,
+                    HistogramForm)
 from .utility import get_variables_names, get_chart
 
 def data(request):
@@ -81,7 +87,7 @@ def bar_chart(request):
         if form.is_valid():
             x_axis = form.cleaned_data.get('x_axis')
             y_axis = form.cleaned_data.get('y_axis')
-            chart = get_chart('Bar chart', df, x_axis, y_axis)                   
+            chart = get_chart('Bar chart', df, x_axis, y_axis=y_axis)                   
             context = {
                 'chart': chart,
                 'form': form
@@ -97,7 +103,7 @@ def scatter_plot(request):
             x_axis = form.cleaned_data.get('x_axis')
             y_axis = form.cleaned_data.get('y_axis')
             color_by = form.cleaned_data.get('color_by')
-            chart = get_chart('Scatter plot', df, x_axis, y_axis, color_by)                   
+            chart = get_chart('Scatter plot', df, x_axis, y_axis=y_axis, color=color_by)                   
             context = {
                 'chart': chart,
                 'form': form
@@ -105,3 +111,18 @@ def scatter_plot(request):
             return render(request, 'dashboard/scatter_plot.html', context)
     else:
         return render(request, 'dashboard/scatter_plot.html', {'form': ScatterForm()})
+
+def histogram(request):
+    if request.method == 'POST':
+        form = HistogramForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data.get('x_axis')
+            bins = form.cleaned_data.get('bins')
+            chart = get_chart('Histogram', df, x_axis, bin=int(bins))                   
+            context = {
+                'chart': chart,
+                'form': form
+            }
+            return render(request, 'dashboard/histogram.html', context)
+    else:
+        return render(request, 'dashboard/histogram.html', {'form': HistogramForm()})
