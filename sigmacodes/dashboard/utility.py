@@ -29,6 +29,7 @@ def get_chart(selected_chart, df, x_axis, y_axis=None, color=None, bin=None):
                          fontdict={'fontsize':16},
                          pad=20)
         pyplot.tight_layout()
+        
 
     elif selected_chart == 'Pie chart':
         x = list(df[x_axis].value_counts())
@@ -87,11 +88,32 @@ def get_chart(selected_chart, df, x_axis, y_axis=None, color=None, bin=None):
     elif selected_chart == 'Histogram':
         pyplot.hist(df[x_axis],
                     bins=bin,
-                    edgecolor='black')        
+                    edgecolor='black')
+        pyplot.xlabel(f'{x_axis}'.capitalize())
+        pyplot.ylabel('Count')        
         pyplot.title(f'A histogram showing the distribution of {x_axis}',
                      fontdict={'fontsize': 16},
                      pad=20)
         pyplot.tight_layout()
+
+    elif selected_chart == 'Line plot':
+        pyplot.plot(df[x_axis],
+                    df[y_axis])
+        pyplot.xlabel(f'{x_axis}'.capitalize())
+        pyplot.ylabel(f'{y_axis}'.capitalize())        
+        pyplot.title(f'A Line graph comparing the distributions of {x_axis} and {y_axis}',
+                     fontdict={'fontsize': 16},
+                     pad=20)
+        pyplot.tight_layout()
+
+    elif selected_chart == 'Box plot':
+        pyplot.boxplot(df[x_axis])
+        pyplot.xlabel(f'{x_axis}'.capitalize())        
+        pyplot.title(f'A box plot showing the distributions of {x_axis}',
+                     fontdict={'fontsize': 16},
+                     pad=20)
+        pyplot.tight_layout()
+
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)

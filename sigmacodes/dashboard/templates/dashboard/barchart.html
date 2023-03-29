@@ -5,7 +5,7 @@ Visualization dashboard
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid dashboard">
     <form class="form-input" action="{% url 'dashboard-barchart' %}" method="post">
         {% csrf_token %}
         {{ form.as_p}}
@@ -15,16 +15,15 @@ Visualization dashboard
     <a class="change" href="{% url 'dashboard-select_chart' %}" style="display: block;">Select a different chart</a>
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% if chart %}
-            <div class="p-2 bd-highlight">
-                <!-- {% autoescape off %} -->
+            <div class="p-4 bd-highlight" id="chart">
+                {% autoescape off %}
                     {{ chart }}
-                    <!-- <img src="data:image/png;base64,{{ data }}"> -->
-                <!-- {% endautoescape %} -->
+                {% endautoescape %}
             </div>
         {% else %}
         {% load static %}
             <div class="p-2 bd-highlight">
-                <img src="{% static 'dashboard/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
                     style="width: 100%;">
             </div>
         {% endif %}

@@ -5,7 +5,7 @@ Visualization dashboard
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid dashboard">
     <form class="form-input" action="{% url 'dashboard-upload_file' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p}}
@@ -15,7 +15,7 @@ Visualization dashboard
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% load static %}
         <div class="p-2 bd-highlight">
-            <img src="{% static 'dashboard/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+            <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
                 style="width: 100%;">
         </div>
         <div class="p-2 bd-highlight">

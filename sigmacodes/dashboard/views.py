@@ -7,7 +7,9 @@ from .forms import (DataSource,
                     NominalNumerical,
                     NominalForm,
                     ScatterForm,
-                    HistogramForm)
+                    HistogramForm,
+                    LineplotForm,
+                    BoxplotForm)
 from .utility import get_variables_names, get_chart
 
 def data(request):
@@ -55,14 +57,8 @@ def select_chart(request):
                 return redirect('dashboard-histogram')
             elif selected_chart == 'Line plot':
                 return redirect('dashboard-lineplot')
-            # x_axis = form.cleaned_data['x_axis']
-            # y_axis = form.cleaned_data['y_axis']
-            # chart = get_chart(selected_chart, df, x_axis, y_axis)                   
-            # context = {
-            #     'chart': chart,
-            #     'form': form
-            # }
-            # return render(request, 'dashboard/chart_specs.html', context)
+            elif selected_chart == 'Box plot':
+                return redirect('dashboard-boxplot')
     else:
         return render(request, 'dashboard/chart_specs.html', {'form': SelectChart()})
 
@@ -126,3 +122,33 @@ def histogram(request):
             return render(request, 'dashboard/histogram.html', context)
     else:
         return render(request, 'dashboard/histogram.html', {'form': HistogramForm()})
+
+def line_plot(request):
+    if request.method == 'POST':
+        form = LineplotForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data.get('x_axis')
+            y_axis = form.cleaned_data.get('y_axis')
+            label = form.cleaned_data.get('label')
+            chart = get_chart('Line plot', df, x_axis, y_axis=y_axis, color=label)                   
+            context = {
+                'chart': chart,
+                'form': form
+            }
+            return render(request, 'dashboard/lineplot.html', context)
+    else:
+        return render(request, 'dashboard/lineplot.html', {'form': LineplotForm()})
+
+def boxplot(request):
+    if request.method == 'POST':
+        form = BoxplotForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data.get('x_axis')
+            chart = get_chart('Box plot', df, x_axis)                   
+            context = {
+                'chart': chart,
+                'form': form
+            }
+            return render(request, 'dashboard/boxplot.html', context)
+    else:
+        return render(request, 'dashboard/boxplot.html', {'form': BoxplotForm()})

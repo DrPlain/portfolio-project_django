@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Visualization dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard">
+    <form class="form-input" action="{% url 'dashboard-boxplot' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input class="btn btn-success" type="submit">
+    </form>
+    <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
+    <a class="change" href="{% url 'dashboard-select_chart' %}" style="display: block;">Select a different chart</a>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+        {% if chart %}
+            <div class="p-4 bd-highlight" id="chart">
+                {% autoescape off %}
+                    {{ chart }}
+                {% endautoescape %}
+            </div>
+        {% else %}
+        {% load static %}
+            <div class="p-2 bd-highlight">
+                <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                    style="width: 100%;">
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -15,14 +15,15 @@ class DataSource(forms.Form):
     
 
 class UploadData(forms.Form):
-    upload_data = forms.FileField(allow_empty_file=False)
+    upload_data = forms.FileField(allow_empty_file=False, label="Upload data (csv or excel)")
 
 class SelectChart(forms.Form):
     CHART_CHOICES = (('Bar chart', 'Bar chart'),
                      ('Pie chart', 'Pie chart'),
                      ('Scatter plot', 'Scatter plot'),
                      ('Histogram', 'Histogram'),
-                     ('Line plot', 'Line plot'))
+                     ('Line plot', 'Line plot'),
+                     ('Box plot', 'Box plot'))
 
     chart_options = forms.CharField(label="Select chart type to use",
                                   widget = forms.Select(choices=CHART_CHOICES))
@@ -58,3 +59,17 @@ class HistogramForm(forms.Form):
                                   widget = forms.Select(choices=numerical_variables))
     bins = forms.ChoiceField(choices=[(x, x) for x in range(1, 21)],
                              label='Number of bins')
+    
+class LineplotForm(forms.Form):
+    new_nominal = list(numerical_variables)
+    new_nominal.insert(0, ('None', 'None'))
+    x_axis = forms.CharField(label="Select X axis value",
+                                  widget = forms.Select(choices=numerical_variables))
+    y_axis = forms.CharField(label="Select Y axis value",
+                                  widget = forms.Select(choices=numerical_variables))
+    label = forms.CharField(label="Label",
+                                  widget = forms.Select(choices=new_nominal))
+
+class BoxplotForm(forms.Form):
+    x_axis = forms.CharField(label="Select X axis value",
+                                  widget = forms.Select(choices=numerical_variables))
