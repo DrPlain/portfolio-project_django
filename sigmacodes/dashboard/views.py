@@ -38,7 +38,7 @@ def upload_file(request):
         form = SelectChart(initial={'chart_options': CHART_CHOICES,
                            'x_axis': VARIABLE_NAMES,
                            'y_axis': VARIABLE_NAMES})
-        return redirect('dashboard-select_chart')
+        return render(request, 'dashboard/fix-upload.html', {'form':DataSource()})
         # return render(request, 'dashboard/chart_specs.html', {'form': form})
     return render(request, 'dashboard/upload.html', {'form': UploadData()})
 

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Visualization dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard">
+    <form class="form-input" action="{% url 'dashboard-data' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input class="btn btn-success" type="submit">
+    </form>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+        <h1 style="color: chocolate; font-size: 50px; text-align: center;">
+            Oops! The feature you selected will be added soon
+        </h1>
+        {% load static %}
+        <div class="p-2 bd-highlight">
+            <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                style="width: 100%;">
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
