@@ -1,9 +1,5 @@
-import plotly.express as px
-from plotly.offline import plot
-import numpy as np
 from matplotlib import pyplot
-from io import BytesIO, StringIO
-import base64
+from io import StringIO
 import seaborn as sns
 
 def get_chart(selected_chart, df, x_axis, y_axis=None, color=None, bin=None):
