@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a&e2q04h9x0#bfx*-v^nt_wnsjg(e=6qd@2mmgmrjsgx483+1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['100.26.233.107', 'sigmacodes.tech', 'www.sigmacodes.tech']
+ALLOWED_HOSTS = ['100.26.233.107', 'sigmacodes.tech', 'www.sigmacodes.tech', 'localhost']
 
 
 # Application definition

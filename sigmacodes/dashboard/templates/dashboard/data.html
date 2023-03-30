@@ -17,17 +17,6 @@ Visualization dashboard
             <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
                 style="width: 100%;">
         </div>
-        <div class="p-2 bd-highlight" id="chart">
-            {% autoescape off %}
-            {% if chart %}
-            {{ chart }}
-            {% else %}
-            <h1 style="color: chocolate; font-size: 50px; text-align: center;">
-                Please select visualization settings
-            </h1>
-            {% endif %}
-            {% endautoescape %}
-        </div>
     </div>
 </div>
 
