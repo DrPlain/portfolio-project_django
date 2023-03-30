@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-import plotly.express as px
 import pandas as pd
 from .forms import (DataSource,
                     SelectChart,
