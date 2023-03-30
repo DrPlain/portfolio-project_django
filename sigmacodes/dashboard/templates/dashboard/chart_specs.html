@@ -11,6 +11,10 @@ Visualization dashboard
         {{ form.as_p}}
         <input class="btn btn-success" type="submit">
     </form>
+    <form class="form-input" action="{% url 'dashboard-view_data' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">View Data</button>
+    </form>
     <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% if chart %}

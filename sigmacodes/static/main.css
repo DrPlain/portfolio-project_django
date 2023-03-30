@@ -1,6 +1,9 @@
 body {
     background-color:lightblue;
 }
+/* #dashboard-body {
+    background-color: white;
+} */
 .showcase {
     background: url("/static/background4.jpg");
     background-repeat: no-repeat;
@@ -11,13 +14,15 @@ body {
     color: chocolate;
 }
 #heading {
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .about p{
-    font-size: 25px;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .about ul li {
-    font-size: 25px;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 .dashboard {
     margin-top: 70px;
@@ -35,6 +40,12 @@ body {
 }
 #chart {
     width: 50%;
+}
+#df-table {
+    width: 50%;
+    background-color: white;
+    justify-content: center;
+    padding-left: 30px;
 }
 .row {
     margin-bottom: 80px;

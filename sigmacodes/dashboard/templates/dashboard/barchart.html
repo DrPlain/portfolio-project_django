@@ -5,11 +5,15 @@ Visualization dashboard
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid dashboard">
+<div class="container-fluid dashboard" id="dashboard-body">
     <form class="form-input" action="{% url 'dashboard-barchart' %}" method="post">
         {% csrf_token %}
         {{ form.as_p}}
         <input class="btn btn-success" type="submit">
+    </form>
+    <form class="form-input" action="{% url 'dashboard-view_data' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit">View Data</button>
     </form>
     <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
     <a class="change" href="{% url 'dashboard-select_chart' %}" style="display: block;">Select a different chart</a>

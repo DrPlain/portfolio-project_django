@@ -4,6 +4,7 @@ import pandas as pd
 from .forms import (DataSource,
                     SelectChart,
                     UploadData, df,
+                    df_table,
                     NominalNumerical,
                     NominalForm,
                     ScatterForm,
@@ -86,7 +87,8 @@ def bar_chart(request):
             chart = get_chart('Bar chart', df, x_axis, y_axis=y_axis)                   
             context = {
                 'chart': chart,
-                'form': form
+                'form': form,
+                'df_table': df_table
             }
             return render(request, 'dashboard/barchart.html', context)
     else:
@@ -152,3 +154,11 @@ def boxplot(request):
             return render(request, 'dashboard/boxplot.html', context)
     else:
         return render(request, 'dashboard/boxplot.html', {'form': BoxplotForm()})
+
+def view_data(request):
+    if request.method == 'POST':
+        print('I am post')
+        context = {
+                'df_table': df_table
+            }
+        return render(request, 'dashboard/view_data.html', context)

@@ -2,7 +2,9 @@ from django import forms
 from .utility import get_variables_names
 import pandas as pd
 
+
 df = pd.read_csv('employee_data.csv')
+df_table = df.head(101).to_html(col_space=80)
 nominal_variables, numerical_variables = get_variables_names(df)
     
 class DataSource(forms.Form):
@@ -31,31 +33,31 @@ class SelectChart(forms.Form):
 class NominalNumerical(forms.Form):
     new_numerical = list(numerical_variables)
     new_numerical.insert(0, ('None', 'None'))
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Nominal)",
                                   widget = forms.Select(choices=nominal_variables))
-    y_axis = forms.CharField(label="Select Y axis value",
+    y_axis = forms.CharField(label="Y axis (Numerical)",
                                   widget = forms.Select(choices=new_numerical))
     
 class NominalForm(forms.Form):
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Nominal)",
                                   widget = forms.Select(choices=nominal_variables))
     
 class NumericalForm(forms.Form):
-    y_axis = forms.CharField(label="Select Y axis value",
+    y_axis = forms.CharField(label="Y axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
     
 class ScatterForm(forms.Form):
     new_numerical = list(numerical_variables)
     new_numerical.insert(0, ('None', 'None'))
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
-    y_axis = forms.CharField(label="Select Y axis value",
+    y_axis = forms.CharField(label="Y axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
     color_by = forms.CharField(label="Color by",
                                   widget = forms.Select(choices=new_numerical))
     
 class HistogramForm(forms.Form):
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
     bins = forms.ChoiceField(choices=[(x, x) for x in range(1, 21)],
                              label='Number of bins')
@@ -63,13 +65,13 @@ class HistogramForm(forms.Form):
 class LineplotForm(forms.Form):
     new_nominal = list(numerical_variables)
     new_nominal.insert(0, ('None', 'None'))
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
-    y_axis = forms.CharField(label="Select Y axis value",
+    y_axis = forms.CharField(label="Y axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
     label = forms.CharField(label="Label",
                                   widget = forms.Select(choices=new_nominal))
 
 class BoxplotForm(forms.Form):
-    x_axis = forms.CharField(label="Select X axis value",
+    x_axis = forms.CharField(label="X axis (Numerical)",
                                   widget = forms.Select(choices=numerical_variables))
