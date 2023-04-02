@@ -20,7 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a&e2q04h9x0#bfx*-v^nt_wnsjg(e=6qd@2mmgmrjsgx483+1-'
+# SECRET_KEY = 'django-insecure-a&e2q04h9x0#bfx*-v^nt_wnsjg(e=6qd@2mmgmrjsgx483+1-'
+try:
+    SECRET_KEY = os.environ['SECRET_KEY']
+except KeyError as e:
+    raise RuntimeError('Could not find SECRET_KEY in environment') from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,14 +35,14 @@ ALLOWED_HOSTS = ['100.26.233.107', 'sigmacodes.tech', 'www.sigmacodes.tech', 'lo
 # Application definition
 
 INSTALLED_APPS = [
-    'dashboard',
-    'landing_page',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dashboard',
+    'landing_page',
 ]
 
 MIDDLEWARE = [
@@ -116,10 +120,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/sigmacodes.tech/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
