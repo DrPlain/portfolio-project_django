@@ -126,10 +126,11 @@ footer {
     font-size: 20px;
 }
 .form-input {
-    padding: 20px;
+    padding: 15px;
+    padding-top: 10px;
     margin-top: 0px;
-    margin-bottom: 10px;
-    font-size: 26px;
+    margin-bottom: 20px;
+    font-size: 30px;
     font-style:normal;
     color: #182638;
     font-weight: 700;
