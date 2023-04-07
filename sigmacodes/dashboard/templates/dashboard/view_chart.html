@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Preview data
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid dashboard" id="dashboard-body">
+    <form class="form-input" action="{% url 'dashboard-data' %}" method="post">
+        {% csrf_token %}
+        <div class="form-item">
+            <button class="btn btn-success" type="submit">Chage data set</button>
+            </div>
+    </form>
+    <form class="form-input" action="{% url 'dashboard-charts' %}" method="post">
+        {% csrf_token %}
+        <div class="form-item">
+            <button class="btn btn-success" type="submit">Return to chart options</button>
+            </div>
+    </form>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+            <div class="p-4 bd-highlight" id="chart">
+                {% autoescape off %}
+                {% load static %}
+                <iframe src="{% static 'dataframe.html'%}" frameborder="0" height="300px" width="1000px" border=0></iframe>
+                    <!-- {{ df_table }} -->
+                {% endautoescape%}
+            </div>
+    </div>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+        {% if chart %}
+            <div class="p-4 bd-highlight" id="chart">
+                {% autoescape off %}
+                    {{ chart }}
+                {% endautoescape %}
+            </div>
+        {% else %}
+        {% load static %}
+            <div class="p-2 bd-highlight">
+                <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                    style="width: 100%;">
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Visualization dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard" id="dashboard-body">
+    <div class="chart-settings">
+        <form class="form-input" action="{% url 'dashboard-charts' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-item" id="chart-options">
+                    <label>Please select chart type:</label>
+                    <select id="select-chart-options" name="chart_options">
+                        <option value="None">None</option>
+                        <option value="Bar chart">Bar chart</option>
+                        <option value="Pie chart">Pie chart</option>
+                        <option value="Histogram">Histogram</option>
+                        <option value="Scatter plot">Scatter plot</option>
+                        <option value="Line plot">Line plot</option>
+                        <option value="Box plot">Box plot</option>
+                    </select>
+                   
+                </div>
+                <div class="form-item" id="nominal-x">
+                    <h2>Variable to visualize : {{ form.nominal_x }}</h2> 
+                 </div>
+                 <div class="form-item" id="numerical-x">
+                    <h2>Variable to visualize: {{ form.numerical_x }}</h2> 
+                 </div>
+                 <div class="form-item" id="numerical-y">
+                    <h2>Compare with: {{ form.numerical_y }}</h2> 
+                 </div>
+                 <div class="form-item" id="numerical-none">
+                    <h2>Compare with: {{ form.numerical_none }}</h2> 
+                 </div>
+                 <div class="form-item" id="color-by">
+                    <h2>Color by: {{ form.color_by }}</h2> 
+                 </div>
+                 <div class="form-item" id="bin">
+                    <h2>Number of bars: {{ form.bins }}</h2> 
+                 </div>
+                 <div class="form-item" id="submit">
+                    <input class="btn btn-success" type="submit" value="Submit">
+                 </div>
+                
+            </fieldset>
+        </form>
+        <form class="form-input" action="{% url 'dashboard-data' %}" method="post">
+            {% csrf_token %}
+            <div class="form-item">
+                <button class="btn btn-success" type="submit">Change data set</button>
+                </div>
+            <!-- <button class="btn btn-success" type="submit">View Data</button> -->
+        </form>       
+    </div>
+    <div class="d-flex align-items-center flex-column bd-highlight mb-10">
+        {% load static %}
+            <div class="p-2 bd-highlight">
+                <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+                    style="width: 100%;">
+            </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
