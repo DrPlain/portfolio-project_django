@@ -9,13 +9,14 @@ Home Page
       <div class="row justify-content-center">
         <div class="d-flex align-items-center flex-column bd-highlight mb-3">
           <div class="p-2 bd-highlight">
-            <h1 style="text-align: center; margin-top: 150px; color: #182638; font-size: 40px;">
+            <h1 style="text-align: center; margin-top: 150px; color: #182638; font-size: 60px;">
               Welcome to <span style="font-style: italic; color: chocolate;">SigmaCodes</span>
             </h1>
           </div>
           <div class="p-2 bd-highlight" style="margin-bottom: 80px;">
-            <form class="d-flex search">
-              <input class="form-control me-2 search" type="search" placeholder="Enter email" aria-label="Search">
+            <form class="d-flex search" action="{% url 'subscribe' %}" method="post">
+              {% csrf_token %}
+              <input class="form-control me-2 search" type="search" placeholder="Enter email to subscribe" aria-label="Search">
               <button class="btn btn-outline-success" id="subscribe" type="submit">Subscribe</button>
             </form>
           </div>
@@ -23,7 +24,7 @@ Home Page
       <div class="row justify-content-center">
         <div class="p-2 bd-highlight">
           {% load static %}
-          <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block"
+          <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block"
           style="width: 70%;">
         </div>
       </div>

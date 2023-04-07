@@ -8,14 +8,17 @@ Visualization dashboard
 <div class="container-fluid dashboard">
     <form class="form-input" action="{% url 'dashboard-upload_file' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p}}
+        <div class="form-item">
+            <h2>Upload file (csv or excel): {{ form.upload_data }}</h2> 
+         </div>
+        <!-- {{ form.as_p}} -->
         <input class="btn btn-success" type="submit">
     </form>
     <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% load static %}
         <div class="p-2 bd-highlight">
-            <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+            <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
                 style="width: 100%;">
         </div>
         <div class="p-2 bd-highlight">

@@ -8,13 +8,15 @@ Visualization dashboard
 <div class="container-fluid dashboard">
     <form class="form-input" action="{% url 'dashboard-data' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p}}
+        <div class="form-item">
+            <h2>Select data set: {{ form.data }}</h2> 
+         </div>
         <input class="btn btn-success" type="submit">
     </form>
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% load static %}
         <div class="p-2 bd-highlight">
-            <img src="{% static 'images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
+            <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block" alt="Responsive image"
                 style="width: 100%;">
         </div>
     </div>
