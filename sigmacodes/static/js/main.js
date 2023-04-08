@@ -58,6 +58,7 @@ $(document).ready(function() {
             $('#numerical-x').hide();
             $('#numerical-y').hide();
             $('#bin').hide();
+            $('#numerical-none').hide();
         }
     });
     $('#select-chart-options').change(function () {
