@@ -4,7 +4,7 @@ from .forms import (DataSource,
                     text_file,
                     ChartSpecs)
 from .utility import get_variables_names, get_chart
-
+from django.contrib.auth.decorators import login_required
 
 def data(request):
     """View to select data set"""
@@ -65,6 +65,7 @@ def chart_specs(request):
         return render(request, 'dashboard/chart.html', {'form': ChartSpecs()})
 
 
+@login_required
 def upload_file(request):
     """View to enable user upload data set"""
 

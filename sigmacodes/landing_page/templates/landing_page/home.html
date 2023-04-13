@@ -5,29 +5,33 @@ Home Page
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="d-flex align-items-center flex-column bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-            <h1 style="text-align: center; margin-top: 150px; color: #182638; font-size: 45px;">
-              Welcome to <span style="font-style: italic; color: chocolate;">SigmaCodes</span>
-            </h1>
-          </div>
-          <div class="p-2 bd-highlight" style="margin-bottom: 80px;">
-            <form class="d-flex search" action="{% url 'subscribe' %}" method="post">
-              {% csrf_token %}
-              <input class="form-control me-2 search" type="search" placeholder="Enter email to subscribe" aria-label="Search">
-              <button class="btn btn-outline-success" id="subscribe" type="submit">Subscribe</button>
-            </form>
-          </div>
+<div class="container-fluid">
+  <!-- <h1 class="text-center mt-5 pt-5">Where am I?</h1> -->
+  <div class="row justify-content-center">
+    <div class="d-flex align-items-center flex-column bd-highlight mb-3">
+      <div class="p-2 bd-highlight">
+        <h1 style="text-align: center; margin-top: 120px; color: #182638; font-size: 45px;">
+          Welcome to <span style="font-style: italic; color: chocolate;">SigmaCodes</span>
+        </h1>
       </div>
-      <div class="row justify-content-center">
-        <div class="p-2 bd-highlight">
-          {% load static %}
-          <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block"
-          style="width: 70%;">
-        </div>
+      <div class="bd-highlight p-4">
+        <form class="d-flex search" action="{% url 'subscribe' %}" method="post">
+          {% csrf_token %}
+          <input class="form-control me-2 search" type="search" placeholder="Enter email to subscribe"
+            aria-label="Search">
+          <button class="btn btn-success" id="subscribe" type="submit">Subscribe</button>
+        </form>
       </div>
+      <p class="text-center p-2 fs-1 fw-bold" style="color: #182638;">
+        Check out our visualization options to get started
+      </p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="p-2 bd-highlight">
+        {% load static %}
+        <img src="{% static 'img/images01.png' %}" class="rounded mx-auto d-block" style="width: 70%;">
+      </div>
+    </div>
   </div>
   <footer class="py-3 my-0">
     <!-- <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -39,5 +43,5 @@ Home Page
     </ul> -->
     <p class="text-center text-muted">&copy; 2023 Dr-Plain ALX</p>
   </footer>
-  
+
   {% endblock %}

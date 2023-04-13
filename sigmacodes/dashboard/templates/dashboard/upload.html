@@ -12,9 +12,14 @@ Visualization dashboard
             <h2>Upload file (csv or excel): {{ form.upload_data }}</h2> 
          </div>
         <!-- {{ form.as_p}} -->
-        <input class="btn btn-success" type="submit">
+        <div class="form-item">
+            <input class="btn btn-success" type="submit" value="Submit">
+         </div>
     </form>
-    <a class="change" href="{% url 'dashboard-data' %}">Change data set</a>
+    <div class="form-item">
+        <a class="btn btn-success fs-3" href="{% url 'dashboard-data' %}">Change data set</a>
+     </div>
+    
     <div class="d-flex align-items-center flex-column bd-highlight mb-10">
         {% load static %}
         <div class="p-2 bd-highlight">
