@@ -86,8 +86,8 @@ body {
 }
 
 .btn-outline-success {
-    color: white;
-    background-color: #182638;
+    color: #182638;
+    /* background-color: #182638; */
     font-size: 20px;
 }
 .btn-success {
