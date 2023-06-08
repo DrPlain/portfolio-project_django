@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y nginx
+COPY sigmacodes.tech.config /etc/nginx/sites-available/sigmacodes.tech.config
+RUN ln -s /etc/nginx/sites-available/sigmacodes.tech.config /etc/nginx/sites-enabled/sigmacodes.tech.config
+#CMD ['service nginx start']

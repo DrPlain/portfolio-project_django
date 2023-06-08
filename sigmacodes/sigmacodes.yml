@@ -1,0 +1,34 @@
+version: '3.9' # specify the Docker Compose version
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql # mount the database data volume
+    restart: always # restart the container if it fails
+
+  app:
+    build:
+        context: .
+        dockerfile: Dockerfile.app
+    command: bash -c "python manage.py runserver 0.0.0.0:8000 && gunicorn -c gunicorn.config.py"
+    volumes:
+      - .:/app # mount the current directory as a volume
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  nginx:
+    build:
+        context: .
+        dockerfile: Dockerfile.nginx
+    ports:
+        - "80:80"
+    depends_on:
+        - app
+
+
+volumes:
+  db_data: # define the database data volume
+

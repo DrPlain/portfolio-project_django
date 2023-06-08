@@ -1,0 +1,20 @@
+FROM python:3.9
+
+# Env variables to optimize Python for docker
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /gunicorn
+
+COPY requirements.txt /gunicorn
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /gunicorn/
+
+RUN mkdir -p /var/{log,run}/gunicorn/
+RUN chown -cR ubuntu:ubuntu /var/{log,run}/gunicorn/
+
+EXPOSE 80
+
+CMD ['gunicorn', '-c', 'gunicorn.config.py']
